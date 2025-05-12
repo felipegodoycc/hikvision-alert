@@ -19,9 +19,7 @@ class Config:
         self.BASE_DIR = os.path.dirname(os.path.abspath(__file__))
         
         # Home assistant and Node-Red configuration
-        self.HOME_ASSISTANT_IP = os.getenv("HOME_ASSISTANT_IP")
-        self.NODE_RED_PORT = os.getenv("NODE_RED_PORT")
-        self.NODE_RED_ENDPOINT = os.getenv("NODE_RED_ENDPOINT")
+        self.WEBHOOK_URL = os.getenv("WEBHOOK_URL")
         
         # Hikvision configuration
         self.HIKVISION_IP = os.getenv("HIKVISION_IP")
@@ -32,11 +30,11 @@ class Config:
         self.TIME_TO_RECONNECT = int(os.getenv("TIME_TO_RECONNECT", 5))
         
         # Image analysis configuration
-        self.IMAGE_STORAGE = os.getenv("IMAGE_STORAGE")
-        self.YOLO_DIR = os.getenv("YOLO_DIR")
-        self.YOLO_CONFIG = os.getenv("YOLO_CONFIG")
-        self.YOLO_WEIGHTS = os.getenv("YOLO_WEIGHTS")
-        self.COCO_NAMES = os.getenv("COCO_NAMES")
+        self.IMAGE_STORAGE = os.getenv("IMAGE_STORAGE", "images")
+        self.YOLO_DIR = os.getenv("YOLO_DIR", "yolo")
+        self.YOLO_CONFIG = os.getenv("YOLO_CONFIG","yolov4-tiny.cfg")
+        self.YOLO_WEIGHTS = os.getenv("YOLO_WEIGHTS","yolov4-tiny.weights")
+        self.COCO_NAMES = os.getenv("COCO_NAMES","coco.names")
         self.CONFIDENCE_THRESHOLD = float(os.getenv("CONFIDENCE_THRESHOLD", 0.5))
         
         # Loki configuration
@@ -56,9 +54,7 @@ class Config:
 
     def validate(self):
         required_vars = [
-            "HOME_ASSISTANT_IP",
-            "NODE_RED_PORT",
-            "NODE_RED_ENDPOINT",
+            "WEBHOOK_URL",
             "HIKVISION_IP",
             "HIKVISION_USER",
             "HIKVISION_PASSWORD"

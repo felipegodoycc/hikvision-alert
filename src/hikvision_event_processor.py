@@ -39,7 +39,7 @@ class HikvisionEventProcessor:
             
     def fire_webhook(channel, snapshot):
         def send():
-            url = f"http://{config.HOME_ASSISTANT_IP}:{config.NODE_RED_PORT}/{config.NODE_RED_ENDPOINT}"
+            url = config.WEBHOOK_URL
             
             logger.debug(f"Disparando webhook para canal: {channel}")
 
