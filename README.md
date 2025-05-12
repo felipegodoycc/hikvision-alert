@@ -1,6 +1,6 @@
 # Hikvision Alert
 
-This project is designed to process events from Hikvision cameras, analyze images using a YOLO model, and send notifications via webhooks. In my case, I send it to Node-Red in my HomeAssistant for analysis with an LLM, and depending on the result, I send a notification to Telegram.
+This project is designed to process events from Hikvision cameras in DVR, analyze images using a YOLO model, and send notifications via webhooks. In my case, I send it to Node-Red in my HomeAssistant for analysis with an LLM, and depending on the result, I send a notification to Telegram.
 
 ## Features
 - Connection to the event stream of Hikvision cameras.
