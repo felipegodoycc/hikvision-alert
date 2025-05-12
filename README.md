@@ -1,62 +1,62 @@
 # Hikvision Alert
 
-Este proyecto está diseñado para procesar eventos de cámaras Hikvision, analizar imágenes utilizando un modelo YOLO y enviar notificaciones a través de webhooks.
+This project is designed to process events from Hikvision cameras, analyze images using a YOLO model, and send notifications via webhooks. In my case, I send it to Node-Red in my HomeAssistant for analysis with an LLM, and depending on the result, I send a notification to Telegram.
 
-## Características
-- Conexión al stream de eventos de cámaras Hikvision.
-- Análisis de imágenes con YOLO para detectar objetos de interés.
-- Gestión de eventos recientes y horarios de grabación.
-- Envío de notificaciones a través de webhooks.
-- Registro de eventos en Loki para análisis posterior.
+## Features
+- Connection to the event stream of Hikvision cameras.
+- Image analysis with YOLO to detect objects of interest.
+- Management of recent events and recording schedules.
+- Sending notifications via webhooks.
+- Logging events to Loki for later analysis (optional).
 
-## Requisitos
-- Python 3.10 o superior.
-- Dependencias listadas en `requirements.txt`.
-- Archivo de configuración `.env` con las siguientes variables:
+## Requirements
+- Python 3.10 or higher.
+- Dependencies listed in `requirements.txt`.
+- Configuration file `.env` with the following variables:
   ```env
-  # Configuración de Hikvision (Obligatorias)
-  HIKVISION_USER=tu_usuario_hikvision
-  HIKVISION_PASSWORD=tu_contraseña_hikvision
-  HIKVISION_IP=ip_de_tu_cámara_hikvision
-  HIKVISION_URL_EVENT=endpoint_de_eventos_hikvision # Predeterminado: ISAPI/Event/notification/alertStream
-  HIKVISION_SNAPSHOT=endpoint_de_snapshot_hikvision # Predeterminado: ISAPI/Streaming/channels
+  # Hikvision Configuration (Required)
+  HIKVISION_USER=your_hikvision_user
+  HIKVISION_PASSWORD=your_hikvision_password
+  HIKVISION_IP=your_hikvision_camera_ip
+  HIKVISION_URL_EVENT=hikvision_event_endpoint # Default: ISAPI/Event/notification/alertStream
+  HIKVISION_SNAPSHOT=hikvision_snapshot_endpoint # Default: ISAPI/Streaming/channels
 
-  # Configuración del Webhook (Obligatoria)
-  WEBHOOK_URL=url_completa_del_webhook_para_eventos
+  # Webhook Configuration (Required)
+  WEBHOOK_URL=full_url_of_the_webhook_for_events
 
-  # Almacenamiento de imágenes (Con valor predeterminado)
-  IMAGE_STORAGE=directorio_para_guardar_imágenes # Predeterminado: images
+  # Image Storage (Default Value)
+  IMAGE_STORAGE=directory_to_store_images # Default: images
 
-  # Configuración de OpenCV (Con valores predeterminados)
-  YOLO_DIR=directorio_del_modelo_yolo # Predeterminado: yolo
-  YOLO_CONFIG=archivo_de_configuración_yolo # Predeterminado: yolov4-tiny.cfg
-  YOLO_WEIGHTS=archivo_de_pesos_yolo # Predeterminado: yolov4-tiny.weights
-  COCO_NAMES=archivo_de_clases_coco # Predeterminado: coco.names
-  CONFIDENCE_THRESHOLD=umbral_de_confianza_para_detección # Predeterminado: 0.5
+  # OpenCV Configuration (Default Values)
+  YOLO_DIR=yolo_model_directory # Default: yolo
+  YOLO_CONFIG=yolo_configuration_file # Default: yolov4-tiny.cfg
+  YOLO_WEIGHTS=yolo_weights_file # Default: yolov4-tiny.weights
+  COCO_NAMES=coco_classes_file # Default: coco.names
+  CONFIDENCE_THRESHOLD=detection_confidence_threshold # Default: 0.5
 
-  # Configuración de eventos (Con valores predeterminados)
-  MAX_EVENTS=número_máximo_de_eventos_a_guardar # Predeterminado: 100
-  DIFFERENCE_TIME=tiempo_en_segundos_entre_eventos_relevantes # Predeterminado: 15
+  # Event Configuration (Default Values)
+  MAX_EVENTS=maximum_number_of_events_to_store # Default: 100
+  DIFFERENCE_TIME=seconds_between_relevant_events # Default: 15
 
-  # Configuración de Loki (Opcional)
-  LOKI_URL=url_de_tu_servidor_loki
+  # Loki Configuration (Optional)
+  LOKI_URL=your_loki_server_url
   ```
 
-## Instalación
-1. Clona este repositorio:
+## Installation
+1. Clone this repository:
    ```bash
-   git clone https://github.com/tu_usuario/hikvision-alert.git
+   git clone https://github.com/your_user/hikvision-alert.git
    cd hikvision-alert
    ```
 
-2. Instala las dependencias:
+2. Install the dependencies:
    ```bash
    pip install -r requirements.txt
    ```
 
-3. Configura el archivo `.env` con tus credenciales y parámetros.
+3. Configure the `.env` file with your credentials and parameters.
 
-4. Asegúrate de que el archivo `config.yaml` contenga los horarios y nombres de las cámaras:
+4. Ensure the `config.yaml` file contains the schedules and names of the cameras:
    ```yaml
    camera_schedules:
      '1':
@@ -66,26 +66,26 @@ Este proyecto está diseñado para procesar eventos de cámaras Hikvision, anali
        start: '00:00'
        end: '23:59'
    cameras_name:
-     '1': 'Acceso principal'
-     '2': 'Exterior Oriente'
+     '1': 'Main Entrance'
+     '2': 'East Exterior'
    ```
 
-## Uso
-Ejecuta el archivo principal para iniciar el procesamiento de eventos:
+## Usage
+Run the main file to start processing events:
 ```bash
 python __main__.py
 ```
 
-## Estructura del Proyecto
-- `__main__.py`: Punto de entrada principal.
-- `src/config.py`: Gestión de configuración.
-- `src/events.py`: Gestión de eventos.
-- `src/hikvision_api.py`: Conexión con cámaras Hikvision.
-- `src/image_analizer.py`: Análisis de imágenes con YOLO.
-- `src/utils.py`: Funciones utilitarias.
+## Project Structure
+- `__main__.py`: Main entry point.
+- `src/config.py`: Configuration management.
+- `src/events.py`: Event management.
+- `src/hikvision_api.py`: Connection with Hikvision cameras.
+- `src/image_analizer.py`: Image analysis with YOLO.
+- `src/utils.py`: Utility functions.
 
-## Contribuciones
-¡Las contribuciones son bienvenidas! Por favor, abre un issue o envía un pull request.
+## Contributions
+Contributions are welcome! Please open an issue or submit a pull request.
 
-## Licencia
-Este proyecto está bajo la Licencia MIT. Consulta el archivo `LICENSE` para más detalles.
+## License
+This project is under the MIT License. See the `LICENSE` file for more details.
