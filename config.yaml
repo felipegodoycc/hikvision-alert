@@ -1,0 +1,21 @@
+# Configuración de horarios de cámaras
+camera_schedules:
+  '1':
+    start: '22:00'
+    end: '08:00'
+  '2':
+    start: '00:00'
+    end: '23:59'
+  '3':
+    start: '21:00'
+    end: '08:00'
+  '4':
+    start: '00:00'
+    end: '23:59'
+
+# Nombres de las cámaras
+cameras_name:
+  '1': 'Acceso principal'
+  '2': 'Exterior Oriente'
+  '3': 'Pasillo Jardin'
+  '4': 'Exterior Poniente'
