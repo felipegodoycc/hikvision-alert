@@ -76,6 +76,44 @@ Run the main file to start processing events:
 python __main__.py
 ```
 
+## Setting Up as a Service
+
+You can set up this project as a systemd service using the `install_service.sh` script. This will ensure the application runs automatically on system startup.
+
+### Steps:
+1. Make the script executable:
+   ```bash
+   chmod +x install_service.sh
+   ```
+
+2. Run the script:
+   ```bash
+   ./install_service.sh
+   ```
+
+The script will:
+- Check if Python 3 is installed.
+- Create a virtual environment in the project directory.
+- Install the required dependencies from `requirements.txt`.
+- Create a systemd service file to run the application.
+- Enable and start the service.
+
+### Managing the Service
+- To check the status of the service:
+  ```bash
+  sudo systemctl status hikvision-alert
+  ```
+
+- To stop the service:
+  ```bash
+  sudo systemctl stop hikvision-alert
+  ```
+
+- To restart the service:
+  ```bash
+  sudo systemctl restart hikvision-alert
+  ```
+
 ## Project Structure
 - `__main__.py`: Main entry point.
 - `src/config.py`: Configuration management.
