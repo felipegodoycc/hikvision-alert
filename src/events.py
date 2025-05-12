@@ -66,7 +66,8 @@ class EventStore():
             index = self.idx[event_id]
             self.self[index]['result'] = True
             self.self[index]['detected_objects'] = detected_objects
-            send_event_to_loki(self.self[index])
+            if config.LOKI_URL:
+                send_event_to_loki(self.self[index])
             return True
         return False
     

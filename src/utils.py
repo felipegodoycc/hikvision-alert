@@ -16,14 +16,15 @@ def config_logger():
     )
 
     # Logger to loki
-    handler = LokiHandler(
-        url=f"{config.LOKI_URL}/loki/api/v1/push",
-        tags={"job": "hikvision_stream", "source": "python"},
-        version="1",
-    )
+    if config.LOKI_URL:
+        handler = LokiHandler(
+            url=f"{config.LOKI_URL}/loki/api/v1/push",
+            tags={"job": "hikvision_stream", "source": "python"},
+            version="1",
+        )
 
-    logger = logging.getLogger(__name__)
-    logger.addHandler(handler)
+        logger = logging.getLogger(__name__)
+        logger.addHandler(handler)
     
     return logger
 
