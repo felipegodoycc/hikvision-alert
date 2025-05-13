@@ -1,8 +1,11 @@
 # Importamos las librerias necesarias
+from src.config import Config
 from src.hikvision_event_processor import HikvisionEventProcessor
 from src.utils import config_logger
 
 # Instanciacion de clases necesarias
+# Punto de acceso global a la configuración
+config = Config()
 hikvsionEventProcessor = HikvisionEventProcessor()
 logger = config_logger()
 

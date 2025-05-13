@@ -89,5 +89,4 @@ class Config:
         print(f"DIFFERENCE_TIME: {self.DIFFERENCE_TIME}")
         print(f"MAX_EVENTS: {self.MAX_EVENTS}")
 
-# Punto de acceso global a la configuración
-config = Config()
+
