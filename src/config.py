@@ -41,7 +41,7 @@ class Config:
         self.LOKI_URL = os.getenv("LOKI_URL", None)
 
         # Cameras configuration
-        config_path = os.path.join(self.BASE_DIR, 'config.yaml')
+        config_path = os.path.join('..',self.BASE_DIR, 'config.yaml')
         with open(config_path, 'r') as file:
             yaml_config = yaml.safe_load(file)
 
