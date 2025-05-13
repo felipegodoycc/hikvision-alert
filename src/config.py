@@ -47,10 +47,14 @@ class Config:
 
         self.CAMERA_SCHEDULES = yaml_config.get('camera_schedules', {})
         self.CAMERAS_NAME = yaml_config.get('cameras_name', {})
+        self.TIME_ZONE = yaml_config.get('time_zone', 'UTC')
 
         # Events configuration
         self.DIFFERENCE_TIME = int(os.getenv("DIFFERENCE_TIME", 5))
         self.MAX_EVENTS = int(os.getenv("MAX_EVENTS", 100))
+        
+        self.validate()
+        self.print_config()
 
     def validate(self):
         required_vars = [
@@ -62,6 +66,28 @@ class Config:
         missing_vars = [var for var in required_vars if not getattr(self, var)]
         if missing_vars:
             raise EnvironmentError(f"Faltan las siguientes variables de entorno: {', '.join(missing_vars)}")
+        
+    def print_config(self):
+        print("Configuración actual:")
+        print(f"WEBHOOK_URL: {self.WEBHOOK_URL}")
+        print(f"HIKVISION_IP: {self.HIKVISION_IP}")
+        print(f"HIKVISION_USER: {self.HIKVISION_USER}")
+        print(f"HIKVISION_PASSWORD: {self.HIKVISION_PASSWORD}")
+        print(f"HIKVISION_URL_EVENT: {self.HIKVISION_URL_EVENT}")
+        print(f"HIKVISION_SNAPSHOT: {self.HIKVISION_SNAPSHOT}")
+        print(f"TIME_TO_RECONNECT: {self.TIME_TO_RECONNECT}")
+        print(f"IMAGE_STORAGE: {self.IMAGE_STORAGE}")
+        print(f"YOLO_DIR: {self.YOLO_DIR}")
+        print(f"YOLO_CONFIG: {self.YOLO_CONFIG}")
+        print(f"YOLO_WEIGHTS: {self.YOLO_WEIGHTS}")
+        print(f"COCO_NAMES: {self.COCO_NAMES}")
+        print(f"CONFIDENCE_THRESHOLD: {self.CONFIDENCE_THRESHOLD}")
+        print(f"LOKI_URL: {self.LOKI_URL}")
+        print(f"CAMERA_SCHEDULES: {self.CAMERA_SCHEDULES}")
+        print(f"CAMERAS_NAME: {self.CAMERAS_NAME}")
+        print(f"TIME_ZONE: {self.TIME_ZONE}")
+        print(f"DIFFERENCE_TIME: {self.DIFFERENCE_TIME}")
+        print(f"MAX_EVENTS: {self.MAX_EVENTS}")
 
 # Punto de acceso global a la configuración
 config = Config()

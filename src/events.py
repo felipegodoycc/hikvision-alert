@@ -4,6 +4,7 @@ import logging
 
 from .config import config
 from .utils import send_event_to_loki
+from pytz import timezone
 
 logger = logging.getLogger(__name__)
 
@@ -81,7 +82,11 @@ class EventStore():
         return None
     
     def check_if_scheduled(self, channel):
-        if config.CAMERA_SCHEDULES is {}:
+
+        tz = timezone(config.TIME_ZONE)
+        now = datetime.datetime.now(tz)
+
+        if config.CAMERA_SCHEDULES == {}:
             logger.info("No hay horarios programados para las cámaras.")
             return True
         
@@ -89,7 +94,7 @@ class EventStore():
             schedule = config.CAMERA_SCHEDULES[channel]
             start_time = datetime.datetime.strptime(schedule['start'], '%H:%M').time()
             end_time = datetime.datetime.strptime(schedule['end'], '%H:%M').time()
-            current_time = datetime.datetime.now().time()
+            current_time = now.time()
             if start_time <= current_time <= end_time:
                 return True
         return False

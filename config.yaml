@@ -19,3 +19,5 @@ cameras_name:
   '2': 'Exterior Oriente'
   '3': 'Pasillo Jardin'
   '4': 'Exterior Poniente'
+
+time_zone: 'America/Santiago'
