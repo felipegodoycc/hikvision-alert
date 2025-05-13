@@ -82,9 +82,11 @@ class EventStore():
         return None
     
     def check_if_scheduled(self, channel):
-
-        tz = timezone(config.TIME_ZONE)
-        now = datetime.datetime.now(tz)
+        now = datetime.datetime.now()
+        if config.TIME_ZONE is not None:
+            logger.debug(f"Configurando zona horaria: {config.TIME_ZONE}")
+            tz = timezone(config.TIME_ZONE)
+            now = datetime.datetime.now(tz)
 
         if config.CAMERA_SCHEDULES == {}:
             logger.info("No hay horarios programados para las cámaras.")
