@@ -18,28 +18,28 @@ This project is designed to process events from Hikvision cameras in DVR, analyz
   HIKVISION_USER=your_hikvision_user
   HIKVISION_PASSWORD=your_hikvision_password
   HIKVISION_IP=your_hikvision_camera_ip
-  HIKVISION_URL_EVENT=hikvision_event_endpoint # Default: ISAPI/Event/notification/alertStream
-  HIKVISION_SNAPSHOT=hikvision_snapshot_endpoint # Default: ISAPI/Streaming/channels
+  HIKVISION_URL_EVENT=hikvision_event_endpoint              # Default: ISAPI/Event/notification/alertStream
+  HIKVISION_SNAPSHOT=hikvision_snapshot_endpoint            # Default: ISAPI/Streaming/channels
 
   # Webhook Configuration (Required)
   WEBHOOK_URL=full_url_of_the_webhook_for_events
 
   # Image Storage (Default Value)
-  IMAGE_STORAGE=directory_to_store_images # Default: images
+  IMAGE_STORAGE=directory_to_store_images                   # Default: images
 
   # OpenCV Configuration (Default Values)
-  YOLO_DIR=yolo_model_directory # Default: yolo
-  YOLO_CONFIG=yolo_configuration_file # Default: yolov4-tiny.cfg
-  YOLO_WEIGHTS=yolo_weights_file # Default: yolov4-tiny.weights
-  COCO_NAMES=coco_classes_file # Default: coco.names
-  CONFIDENCE_THRESHOLD=detection_confidence_threshold # Default: 0.5
+  YOLO_DIR=yolo_model_directory                             # Default: yolo
+  YOLO_CONFIG=yolo_configuration_file                       # Default: yolov4-tiny.cfg
+  YOLO_WEIGHTS=yolo_weights_file                            # Default: yolov4-tiny.weights
+  COCO_NAMES=coco_classes_file                              # Default: coco.names
+  CONFIDENCE_THRESHOLD=detection_confidence_threshold       # Default: 0.5
 
   # Event Configuration (Default Values)
-  MAX_EVENTS=maximum_number_of_events_to_store # Default: 100
-  DIFFERENCE_TIME=seconds_between_relevant_events # Default: 15
+  MAX_EVENTS=maximum_number_of_events_to_store              # Default: 100
+  DIFFERENCE_TIME=seconds_between_relevant_events           # Default: 15
 
   # Loki Configuration (Optional)
-  LOKI_URL=your_loki_server_url
+  LOKI_URL=your_loki_server_url                             # If not set, Loki logging is disabled
   ```
 - Your Hikvision DVR must be configured to send alerts to event stream. This is usually done through the web interface of the DVR.
 
@@ -69,7 +69,7 @@ This project is designed to process events from Hikvision cameras in DVR, analyz
 
 4. Ensure the `config.yaml` file contains the schedules and names of the cameras:
 
-   > **IMPORTANT**: The camera ID must match the one in your Hikvision DVR. Check your DVR to get the correct camera ID.
+   > **IMPORTANT**: The camera ID must match the one in your Hikvision DVR. Check your DVR to get the correct camera ID. Normally, the camera ID is same of the channel number.
 
    ```yaml
    camera_schedules:
@@ -83,6 +83,8 @@ This project is designed to process events from Hikvision cameras in DVR, analyz
      '1': 'Main Entrance'
      '2': 'East Exterior'
    ```
+
+   If you want to use the default configuration, you can skip this step. The default configuration is set to record all events from all cameras.
 
 ## Usage
 Run the main file to start processing events:
