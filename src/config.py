@@ -55,7 +55,6 @@ class Config:
         
         # Validamos y mostramos la configuración al inicializar
         self.validate()
-        self.print_config()
 
     def validate(self):
         required_vars = [
