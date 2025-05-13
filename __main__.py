@@ -1,5 +1,5 @@
 # Importamos las librerias necesarias
-from hikvision_event_processor import HikvisionEventProcessor
+from src.hikvision_event_processor import HikvisionEventProcessor
 from src.utils import config_logger
 
 # Instanciacion de clases necesarias
