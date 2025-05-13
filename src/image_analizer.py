@@ -1,10 +1,9 @@
 import os
 import cv2
 
+from .logger import logger
 from .config import config
-from .utils import config_logger, timeit
-
-logger = config_logger()
+from .utils import timeit
 
 class ImageAnalizer():
     def __init__(self):

@@ -2,33 +2,9 @@
 import requests 
 import json
 import time
-import logging
-from logging_loki import LokiHandler
 
+from .logger import logger
 from .config import config
-
-# Configuracion de logging
-def config_logger():
-    # Logger sistema
-    logging.basicConfig(
-        level='DEBUG',
-        format='%(asctime)s [%(levelname)s] %(message)s'
-    )
-
-    # Logger to loki
-    if config.LOKI_URL:
-        handler = LokiHandler(
-            url=f"{config.LOKI_URL}/loki/api/v1/push",
-            tags={"job": "hikvision_stream", "source": "python"},
-            version="1",
-        )
-
-        logger = logging.getLogger(__name__)
-        logger.addHandler(handler)
-    
-    return logger
-
-logger = config_logger()
 
 def send_event_to_loki(event):
     try:

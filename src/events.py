@@ -1,14 +1,11 @@
 import datetime
 import uuid
-import logging
+
+from .logger import logger
 
 from .config import config
 from .utils import send_event_to_loki
 from pytz import timezone
-
-from .utils import config_logger
-
-logger = config_logger()
 
 class EventStore():
     def __init__(self):
@@ -29,7 +26,7 @@ class EventStore():
             'result': False,
             'event_description': hik_event.get('eventDescription', 'Desconocido'),
             'event_target_type': hik_event.get('targetType', 'Desconocido'),
-            'selftate': hik_event.get('selftate', 'Desconocido'),
+            'event_state': hik_event.get('eventState', 'Desconocido'),
             'url_snapshot': hik_event.get('bkgUrl', None),
             'number_of_objects': hik_event.get('detectionPicturesNumber', 0),
             'active_post_count': hik_event.get('activePostCount', 0)

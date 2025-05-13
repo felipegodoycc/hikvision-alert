@@ -9,8 +9,7 @@ from .events import EventStore
 from .hikvision_api import HikvisionAPI
 from .image_analizer import ImageAnalizer
 from .config import config
-
-logger = config_logger()
+from .logger import logger
 
 class HikvisionEventProcessor:
     def __init__(self):

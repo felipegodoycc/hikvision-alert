@@ -14,7 +14,8 @@ class Config:
 
     def _initialize(self):
         dotenv.load_dotenv()
-        
+        # Logger configuration
+        self.LOGGER_LEVEL = os.getenv("LOGGER_LEVEL", "INFO")
         # Base directory
         self.BASE_DIR = os.path.dirname(os.path.abspath(__file__))
         
@@ -67,7 +68,4 @@ class Config:
         if missing_vars:
             raise EnvironmentError(f"Faltan las siguientes variables de entorno: {', '.join(missing_vars)}")
         
-
-
-# Punto de acceso global a la configuración
 config = Config()

@@ -6,10 +6,8 @@ import requests
 from requests.auth import HTTPDigestAuth
 import xmltodict
 
-from .utils import config_logger
 from .config import config
-
-logger = config_logger()
+from .logger import logger
 
 class HikvisionAPI:
     def __init__(self, ip, user, password):
