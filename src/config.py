@@ -4,6 +4,9 @@ import dotenv
 import yaml
 import logging
 
+# Configuramos el logger para capturar mensajes de nivel INFO
+logging.basicConfig(level=logging.INFO)
+
 class Config:
     _instance = None
 
