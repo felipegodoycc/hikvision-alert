@@ -3,9 +3,10 @@ from src.config import Config
 from src.hikvision_event_processor import HikvisionEventProcessor
 from src.utils import config_logger
 
-# Instanciacion de clases necesarias
-# Punto de acceso global a la configuración
+# Inicializamos la configuración para validar y mostrar las variables
 config = Config()
+
+# Instanciacion de clases necesarias
 hikvsionEventProcessor = HikvisionEventProcessor()
 logger = config_logger()
 
