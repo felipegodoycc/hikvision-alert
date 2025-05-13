@@ -94,8 +94,12 @@ class EventStore():
             start_time = datetime.datetime.strptime(schedule['start'], '%H:%M').time()
             end_time = datetime.datetime.strptime(schedule['end'], '%H:%M').time()
             current_time = now.time()
-            if start_time <= current_time <= end_time:
-                return True
+            if start_time <= end_time:  # Caso normal, dentro del mismo día
+                if start_time <= current_time <= end_time:
+                    return True
+            else:  # Caso en el que el horario cruza la medianoche
+                if current_time >= start_time or current_time <= end_time:
+                    return True
         return False
     
     # Chequeamos si el evento del canal es reciente, si ha pasado al menos 20 segundos desde el ultimo evento, no lo agregamos
