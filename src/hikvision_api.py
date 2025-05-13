@@ -39,7 +39,7 @@ class HikvisionAPI:
         snapshot = self.take_snapshot(channel, url)
             
         if snapshot:
-            filename = f"snapshot_{config.CAMERAS_NAME.get(channel, 'Desconocido').lower()}_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.jpg"
+            filename = f"snapshot_{config.CAMERAS_NAME.get(channel, 'Desconocido').lower().replace(" ","_")}_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.jpg"
             fullpath = os.path.join(config.BASE_DIR, config.IMAGE_STORAGE, filename)
             with open(fullpath, 'wb') as f:
                 f.write(snapshot)

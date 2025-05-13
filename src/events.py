@@ -19,7 +19,7 @@ class EventStore():
     def add_event(self, hik_event):
         channel = hik_event.get('channelID')
         logger.debug(f"Evento hik: {str(hik_event)}")
-        hik_camera_name = hik_event.get('cameraName', 'Desconocido').replace(" ", "_")
+        hik_camera_name = hik_event.get('cameraName', 'Desconocido')
         camera_name = config.CAMERAS_NAME.get(channel, hik_camera_name).replace(" ", "_")
         alert_event = {
             'id': str(uuid.uuid4()),
