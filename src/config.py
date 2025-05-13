@@ -2,6 +2,7 @@
 import os
 import dotenv
 import yaml
+import logging
 
 class Config:
     _instance = None
@@ -69,26 +70,27 @@ class Config:
             raise EnvironmentError(f"Faltan las siguientes variables de entorno: {', '.join(missing_vars)}")
         
     def print_config(self):
-        print("Configuración actual:")
-        print(f"WEBHOOK_URL: {self.WEBHOOK_URL}")
-        print(f"HIKVISION_IP: {self.HIKVISION_IP}")
-        print(f"HIKVISION_USER: {self.HIKVISION_USER}")
-        print(f"HIKVISION_PASSWORD: {self.HIKVISION_PASSWORD}")
-        print(f"HIKVISION_URL_EVENT: {self.HIKVISION_URL_EVENT}")
-        print(f"HIKVISION_SNAPSHOT: {self.HIKVISION_SNAPSHOT}")
-        print(f"TIME_TO_RECONNECT: {self.TIME_TO_RECONNECT}")
-        print(f"IMAGE_STORAGE: {self.IMAGE_STORAGE}")
-        print(f"YOLO_DIR: {self.YOLO_DIR}")
-        print(f"YOLO_CONFIG: {self.YOLO_CONFIG}")
-        print(f"YOLO_WEIGHTS: {self.YOLO_WEIGHTS}")
-        print(f"COCO_NAMES: {self.COCO_NAMES}")
-        print(f"CONFIDENCE_THRESHOLD: {self.CONFIDENCE_THRESHOLD}")
-        print(f"LOKI_URL: {self.LOKI_URL}")
-        print(f"CAMERA_SCHEDULES: {self.CAMERA_SCHEDULES}")
-        print(f"CAMERAS_NAME: {self.CAMERAS_NAME}")
-        print(f"TIME_ZONE: {self.TIME_ZONE}")
-        print(f"DIFFERENCE_TIME: {self.DIFFERENCE_TIME}")
-        print(f"MAX_EVENTS: {self.MAX_EVENTS}")
+        logger = logging.getLogger("Config")
+        logger.info("Configuración actual:")
+        logger.info(f"WEBHOOK_URL: {self.WEBHOOK_URL}")
+        logger.info(f"HIKVISION_IP: {self.HIKVISION_IP}")
+        logger.info(f"HIKVISION_USER: {self.HIKVISION_USER}")
+        logger.info(f"HIKVISION_PASSWORD: {self.HIKVISION_PASSWORD}")
+        logger.info(f"HIKVISION_URL_EVENT: {self.HIKVISION_URL_EVENT}")
+        logger.info(f"HIKVISION_SNAPSHOT: {self.HIKVISION_SNAPSHOT}")
+        logger.info(f"TIME_TO_RECONNECT: {self.TIME_TO_RECONNECT}")
+        logger.info(f"IMAGE_STORAGE: {self.IMAGE_STORAGE}")
+        logger.info(f"YOLO_DIR: {self.YOLO_DIR}")
+        logger.info(f"YOLO_CONFIG: {self.YOLO_CONFIG}")
+        logger.info(f"YOLO_WEIGHTS: {self.YOLO_WEIGHTS}")
+        logger.info(f"COCO_NAMES: {self.COCO_NAMES}")
+        logger.info(f"CONFIDENCE_THRESHOLD: {self.CONFIDENCE_THRESHOLD}")
+        logger.info(f"LOKI_URL: {self.LOKI_URL}")
+        logger.info(f"CAMERA_SCHEDULES: {self.CAMERA_SCHEDULES}")
+        logger.info(f"CAMERAS_NAME: {self.CAMERAS_NAME}")
+        logger.info(f"TIME_ZONE: {self.TIME_ZONE}")
+        logger.info(f"DIFFERENCE_TIME: {self.DIFFERENCE_TIME}")
+        logger.info(f"MAX_EVENTS: {self.MAX_EVENTS}")
 
 
 # Punto de acceso global a la configuración
