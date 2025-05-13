@@ -44,12 +44,12 @@ EOL
 
 # Reload systemd, enable and start the service
 echo "Reloading systemd daemon..."
-sudo systemctl daemon-reload
+systemctl daemon-reload
 
 echo "Enabling the ${SERVICE_NAME} service..."
-sudo systemctl enable ${SERVICE_NAME}
+systemctl enable ${SERVICE_NAME}
 
 echo "Starting the ${SERVICE_NAME} service..."
-sudo systemctl start ${SERVICE_NAME}
+systemctl start ${SERVICE_NAME}
 
 echo "The ${SERVICE_NAME} service was successfully installed and started."
