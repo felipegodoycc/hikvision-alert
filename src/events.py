@@ -16,10 +16,11 @@ class EventStore():
     def add_event(self, hik_event):
         channel = hik_event.get('channelID')
         logger.debug(f"Evento hik: {str(hik_event)}")
+        camera_name = config.CAMERAS_NAME.get(channel, hik_event.get('channelName', 'Desconocido'))
         alert_event = {
             'id': str(uuid.uuid4()),
             'channel': channel,
-            'channel_name': config.CAMERAS_NAME.get(channel, 'Desconocido'),
+            'channel_name': camera_name,
             'timestamp': datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
             'result': False,
             'event_description': hik_event.get('eventDescription', 'Desconocido'),
@@ -80,6 +81,10 @@ class EventStore():
         return None
     
     def check_if_scheduled(self, channel):
+        if config.CAMERA_SCHEDULES is {}:
+            logger.info("No hay horarios programados para las cámaras.")
+            return True
+        
         if channel in config.CAMERA_SCHEDULES:
             schedule = config.CAMERA_SCHEDULES[channel]
             start_time = datetime.datetime.strptime(schedule['start'], '%H:%M').time()
