@@ -53,6 +53,7 @@ class Config:
         self.DIFFERENCE_TIME = int(os.getenv("DIFFERENCE_TIME", 5))
         self.MAX_EVENTS = int(os.getenv("MAX_EVENTS", 100))
         
+        # Validamos y mostramos la configuración al inicializar
         self.validate()
         self.print_config()
 

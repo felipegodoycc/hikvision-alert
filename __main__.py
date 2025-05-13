@@ -3,8 +3,12 @@ from src.config import Config
 from src.hikvision_event_processor import HikvisionEventProcessor
 from src.utils import config_logger
 
-# Inicializamos la configuración para validar y mostrar las variables
-config = Config()
+# Agregamos mensajes de depuración para verificar la inicialización de Config
+try:
+    config = Config()
+    print("Configuración inicializada correctamente.")
+except Exception as e:
+    print(f"Error al inicializar la configuración: {str(e)}")
 
 # Instanciacion de clases necesarias
 hikvsionEventProcessor = HikvisionEventProcessor()
