@@ -6,7 +6,9 @@ from .config import config
 from .utils import send_event_to_loki
 from pytz import timezone
 
-logger = logging.getLogger(__name__)
+from .utils import config_logger
+
+logger = config_logger()
 
 class EventStore():
     def __init__(self):

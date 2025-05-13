@@ -2,8 +2,10 @@
 import os
 import dotenv
 import yaml
-import logging
 
+from .utils import config_logger
+
+logger = config_logger()
 
 class Config:
     _instance = None
@@ -71,7 +73,6 @@ class Config:
             raise EnvironmentError(f"Faltan las siguientes variables de entorno: {', '.join(missing_vars)}")
         
     def print_config(self):
-        logger = logging.getLogger("Config")
         logger.info("Configuración actual:")
         logger.info(f"WEBHOOK_URL: {self.WEBHOOK_URL}")
         logger.info(f"HIKVISION_IP: {self.HIKVISION_IP}")

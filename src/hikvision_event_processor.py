@@ -3,14 +3,14 @@ from urllib3 import Retry
 from requests.adapters import HTTPAdapter
 import threading
 import os
-import logging
 
+from .utils import config_logger
 from .events import EventStore
 from .hikvision_api import HikvisionAPI
 from .image_analizer import ImageAnalizer
 from .config import config
 
-logger = logging.getLogger(__name__)
+logger = config_logger()
 
 class HikvisionEventProcessor:
     def __init__(self):
@@ -24,7 +24,7 @@ class HikvisionEventProcessor:
                 channel = hikvision_event.get('channelID')
                 isRecent, alert_event = self.eventsStore.check_if_recent_event(hikvision_event)
                 if not isRecent:
-                    self.logger.debug(f"Agregando evento del canal {channel} y enviando a analisis interno.", extra=alert_event)
+                    logger.debug(f"Agregando evento del canal {channel} y enviando a analisis interno.", extra=alert_event)
                     snapshot = self.hikvisionApi.save_snapshot(channel, alert_event.get('url_snapshot'))
                     if snapshot:
                         objetos = self.imageAnalizer.detectar_objetos(snapshot)
@@ -35,7 +35,7 @@ class HikvisionEventProcessor:
                             self.eventsStore.delete_event(alert_event['id']) # Eliminamos el ultimo evento ya que no tiene importancia
                         os.remove(snapshot)
         except Exception as e:
-            self.logger.error(f"[process_event] Error procesando evento: { str(e) }")
+            logger.error(f"[process_event] Error procesando evento: { str(e) }")
             
     def fire_webhook(channel, snapshot):
         def send():
