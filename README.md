@@ -47,11 +47,10 @@ This project is designed to process events from Hikvision cameras in DVR, analyz
 
 1. Access the web interface of your Hikvision DVR.
 2. Navigate to the "Configuration" section.
-3. Go to sidebar > "Intelligent" 
-4. Select type event if you want to receive alerts from the camera.
-5. Select the camera you want to configure.
-6. Enable the event type you want to receive alerts for (e.g., motion detection).
-7. In the event settings, configure the "Link action" to send an alert to "Notify remote software".
+3. In the sidebar, go to the "Intelligent" section.
+4. Select the event type you want to receive alerts for (e.g., motion detection).
+5. Choose the camera you want to configure.
+6. Enable the event type and configure the "Link action" to send an alert to "Notify remote software".
 
 ## Installation
 1. Clone this repository:
@@ -64,12 +63,13 @@ This project is designed to process events from Hikvision cameras in DVR, analyz
    ```bash
    pip install -r requirements.txt
    ```
+   > **Note**: If you are not using the `install_service.sh` script, ensure you are in a virtual environment before running this command.
 
 3. Configure the `.env` file with your credentials and parameters.
 
 4. Ensure the `config.yaml` file contains the schedules and names of the cameras:
 
-> **IMPORTANT**: The camera id must be the same as the one in the Hikvision camera. Check your Hikvision DVR for get the correct camera ID.
+   > **IMPORTANT**: The camera ID must match the one in your Hikvision DVR. Check your DVR to get the correct camera ID.
 
    ```yaml
    camera_schedules:
@@ -89,10 +89,13 @@ Run the main file to start processing events:
 ```bash
 python __main__.py
 ```
+> **Note**: Ensure you run this command from the root directory of the project.
 
 ## Setting Up as a Service
 
 You can set up this project as a systemd service using the `install_service.sh` script. This will ensure the application runs automatically on system startup.
+
+> **Note**: This section is specific to Linux systems with `systemd`. Windows users can run the application manually or use a task scheduler.
 
 ### Steps:
 1. Make the script executable:
