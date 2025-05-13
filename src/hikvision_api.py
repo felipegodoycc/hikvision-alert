@@ -50,12 +50,12 @@ class HikvisionAPI:
     def listen_hikvision_events(self, callback):
         url = self.url_event
         
-        logger.info("Iniciando conexión al stream de eventos Hikvision...")
+        logger.info("Iniciando conexion al stream de eventos Hikvision...")
 
         while True:
             try:
                 with requests.get(url, auth=self.auth, stream=True, timeout=(3, 10)) as r:
-                    logger.info("✅ Conectado al stream de eventos.")
+                    logger.info("Conectado al stream de eventos.")
                     buffer = b""
 
                     for line in r.iter_lines(chunk_size=512):

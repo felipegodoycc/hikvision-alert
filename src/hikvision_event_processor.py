@@ -62,9 +62,9 @@ class HikvisionEventProcessor:
             try:
                 res = session.post(url, data=payload, files=files, timeout=10)
                 res.raise_for_status()
-                logger.debug(f"✅ Webhook enviado con éxito: {res.status_code}")
+                logger.debug(f"Webhook enviado con éxito: {res.status_code}")
             except requests.exceptions.RequestException as e:
-                logger.error(f"❌ Error enviando webhook: {e}")
+                logger.error(f"Error enviando webhook: {e}")
             finally:
                 session.close()
                 files["image"].close()
