@@ -84,7 +84,7 @@ class EventStore():
     def check_if_scheduled(self, channel):
         tz = timezone(config.TIME_ZONE)
         now = datetime.datetime.now(tz)
-
+        logger.debug(f"Hora actual en la zona horaria {config.TIME_ZONE}: {now}")
         if config.CAMERA_SCHEDULES == {}:
             logger.info("No hay horarios programados para las cámaras.")
             return True
