@@ -41,6 +41,17 @@ This project is designed to process events from Hikvision cameras in DVR, analyz
   # Loki Configuration (Optional)
   LOKI_URL=your_loki_server_url
   ```
+- Your Hikvision DVR must be configured to send alerts to event stream. This is usually done through the web interface of the DVR.
+
+## Configure Hikvision DVR
+
+1. Access the web interface of your Hikvision DVR.
+2. Navigate to the "Configuration" section.
+3. Go to sidebar > "Intelligent" 
+4. Select type event if you want to receive alerts from the camera.
+5. Select the camera you want to configure.
+6. Enable the event type you want to receive alerts for (e.g., motion detection).
+7. In the event settings, configure the "Link action" to send an alert to "Notify remote software".
 
 ## Installation
 1. Clone this repository:
@@ -57,13 +68,16 @@ This project is designed to process events from Hikvision cameras in DVR, analyz
 3. Configure the `.env` file with your credentials and parameters.
 
 4. Ensure the `config.yaml` file contains the schedules and names of the cameras:
+
+> **IMPORTANT**: The camera id must be the same as the one in the Hikvision camera. Check your Hikvision DVR for get the correct camera ID.
+
    ```yaml
    camera_schedules:
      '1':
-       start: '22:00'
+       start: '22:00' # Night
        end: '08:00'
      '2':
-       start: '00:00'
+       start: '00:00' # All day
        end: '23:59'
    cameras_name:
      '1': 'Main Entrance'
