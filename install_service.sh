@@ -27,7 +27,7 @@ deactivate
 
 # Create the service file with the virtual environment configured
 echo "Creating service file at ${SERVICE_FILE}..."
-sudo bash -c "cat > ${SERVICE_FILE}" <<EOL
+bash -c "cat > ${SERVICE_FILE}" <<EOL
 [Unit]
 Description=Hikvision Alert Service
 After=network.target
