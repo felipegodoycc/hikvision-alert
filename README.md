@@ -40,6 +40,9 @@ This project is designed to process events from Hikvision cameras in DVR, analyz
 
   # Loki Configuration (Optional)
   LOKI_URL=your_loki_server_url                             # If not set, Loki logging is disabled
+
+  # Logger configuration (Optional)
+  LOGGER_LEVEL=DEBUG
   ```
 - Your Hikvision DVR must be configured to send alerts to event stream. This is usually done through the web interface of the DVR.
 
