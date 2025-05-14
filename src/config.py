@@ -68,4 +68,10 @@ class Config:
         if missing_vars:
             raise EnvironmentError(f"Faltan las siguientes variables de entorno: {', '.join(missing_vars)}")
         
+    def print_vars(self):
+        print("Configuración:")
+        for key, value in self.__dict__.items():
+            if key != "_instance":
+                print(f"{key}: {value}")
+        
 config = Config()

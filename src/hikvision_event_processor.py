@@ -4,7 +4,6 @@ from requests.adapters import HTTPAdapter
 import threading
 import os
 
-from .utils import config_logger
 from .events import EventStore
 from .hikvision_api import HikvisionAPI
 from .image_analizer import ImageAnalizer
@@ -16,6 +15,7 @@ class HikvisionEventProcessor:
         self.eventsStore = EventStore()
         self.hikvisionApi = HikvisionAPI(config.HIKVISION_IP, config.HIKVISION_USER, config.HIKVISION_PASSWORD)
         self.imageAnalizer = ImageAnalizer()
+        self.imageAnalizer.load_model()
 
     def process_event(self, hikvision_event):
         try:
@@ -36,7 +36,7 @@ class HikvisionEventProcessor:
         except Exception as e:
             logger.error(f"[process_event] Error procesando evento: { str(e) }")
             
-    def fire_webhook(channel, snapshot):
+    def fire_webhook(self, channel, snapshot):
         def send():
             url = config.WEBHOOK_URL
             
