@@ -44,7 +44,7 @@ Description=Hikvision Alert Service
 After=network.target
 
 [Service]
-ExecStart=${VENV_DIR}/bin/python ${INSTALL_DIR}/__main__.py
+ExecStart=${VENV_DIR}/bin/python ${INSTALL_DIR}/service.py
 WorkingDirectory=${INSTALL_DIR}
 Restart=always
 User=$(whoami)
