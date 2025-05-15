@@ -120,7 +120,7 @@ This project is designed to process events from Hikvision cameras in DVR, analyz
 3. Execute the `install_service.sh` script:
    ```bash
    chmod +x install_service.sh
-   ./install_service.sh
+   ./install_service.sh # If you dont have permission, use sudo
    ```
 
 4. Configure the `.env` file with your credentials and parameters.
