@@ -55,22 +55,32 @@ This project is designed to process events from Hikvision cameras in DVR, analyz
 5. Choose the camera you want to configure.
 6. Enable the event type and configure the "Link action" to send an alert to "Notify remote software".
 
-## Installation
+## Usage as script
 1. Clone this repository:
    ```bash
    git clone https://github.com/your_user/hikvision-alert.git
    cd hikvision-alert
    ```
 
-2. Install the dependencies:
+2. Install python (if not already installed):
    ```bash
+   sudo apt install python3 python3-pip python3-venv
+   ```
+
+3. Create a virtual environment:
+   ```bash
+    python3 -m venv venv
+    ```
+
+3. Install the dependencies:
+   ```bash
+   source venv/bin/activate
    pip install -r requirements.txt
    ```
-   > **Note**: If you are not using the `install_service.sh` script, ensure you are in a virtual environment before running this command.
 
-3. Configure the `.env` file with your credentials and parameters.
+4. Configure the `.env` file with your credentials and parameters.
 
-4. Ensure the `config.yaml` file contains the schedules and names of the cameras:
+5. Ensure the `config.yaml` file contains the schedules and names of the cameras:
 
    > **IMPORTANT**: The camera ID must match the one in your Hikvision DVR. Check your DVR to get the correct camera ID. Normally, the camera ID is same of the channel number.
 
@@ -89,36 +99,53 @@ This project is designed to process events from Hikvision cameras in DVR, analyz
 
    If you want to use the default configuration, you can skip this step. The default configuration is set to record all events from all cameras.
 
-## Usage
-Run the main file to start processing events:
-```bash
-python __main__.py
-```
-> **Note**: Ensure you run this command from the root directory of the project.
-
-## Setting Up as a Service
-
-You can set up this project as a systemd service using the `install_service.sh` script. This will ensure the application runs automatically on system startup.
-
-> **Note**: This section is specific to Linux systems with `systemd`. Windows users can run the application manually or use a task scheduler.
-
-### Steps:
-1. Make the script executable:
+6. Run the application:
    ```bash
-   chmod +x install_service.sh
+   python __main__.py
+   ``` 
+
+## Install as a service
+
+1. Clone this repository:
+   ```bash
+    git clone
+    cd hikvision-alert
    ```
 
-2. Run the script:
+2. Install python (if not already installed):
    ```bash
+   sudo apt install python3 python3-pip python3-venv
+   ```
+
+3. Execute the `install_service.sh` script:
+   ```bash
+   chmod +x install_service.sh
    ./install_service.sh
    ```
 
-The script will:
-- Check if Python 3 is installed.
-- Create a virtual environment in the project directory.
-- Install the required dependencies from `requirements.txt`.
-- Create a systemd service file to run the application.
-- Enable and start the service.
+4. Configure the `.env` file with your credentials and parameters.
+5. Ensure the `config.yaml` file contains the schedules and names of the cameras:
+
+   > **IMPORTANT**: The camera ID must match the one in your Hikvision DVR. Check your DVR to get the correct camera ID. Normally, the camera ID is same of the channel number.
+
+   ```yaml
+   camera_schedules:
+     '1':
+       start: '22:00' # Night
+       end: '08:00'
+     '2':
+       start: '00:00' # All day
+       end: '23:59'
+   cameras_name:
+     '1': 'Main Entrance'
+     '2': 'East Exterior'
+   ```
+
+6. Enable and start the service:
+   ```bash
+   sudo systemctl enable hikvision-alert
+   sudo systemctl start hikvision-alert
+   ```
 
 ### Managing the Service
 - To check the status of the service:
@@ -146,6 +173,9 @@ The script will:
 
 ## Contributions
 Contributions are welcome! Please open an issue or submit a pull request.
+
+## Issues
+If you encounter any issues, please open an issue on GitHub. Include details about your environment and the steps to reproduce the problem.
 
 ## License
 This project is under the MIT License. See the `LICENSE` file for more details.
