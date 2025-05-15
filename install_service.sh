@@ -25,6 +25,17 @@ source "$VENV_DIR/bin/activate"
 pip install -r "$INSTALL_DIR/requirements.txt"
 deactivate
 
+# Create env file
+ENV_FILE="${INSTALL_DIR}/.env"
+
+if [ ! -f "$ENV_FILE" ]; then
+    echo "Creating .env file..."
+    touch "$ENV_FILE"
+    echo "Please configure the .env file with your settings."
+else
+    echo ".env file already exists. Please check it for your settings."
+fi
+
 # Create the service file with the virtual environment configured
 echo "Creating service file at ${SERVICE_FILE}..."
 bash -c "cat > ${SERVICE_FILE}" <<EOL
@@ -46,10 +57,7 @@ EOL
 echo "Reloading systemd daemon..."
 systemctl daemon-reload
 
-echo "Enabling the ${SERVICE_NAME} service..."
-systemctl enable ${SERVICE_NAME}
 
-echo "Starting the ${SERVICE_NAME} service..."
-systemctl start ${SERVICE_NAME}
-
-echo "The ${SERVICE_NAME} service was successfully installed and started."
+echo "The ${SERVICE_NAME} service was successfully installed."
+echo "After configuring the .env file, you can start the service with:"
+echo "sudo systemctl start ${SERVICE_NAME}"
