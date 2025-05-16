@@ -17,6 +17,7 @@ class HikvisionAlertLogger:
 
         # Logger to loki
         if config.LOKI_URL:
+            print(f"[DEBUG] LOKI_URL usado por logger: {config.LOKI_URL!r}")  # Log temporal para depuración
             handler = LokiHandler(
                 url=f"{config.LOKI_URL}/loki/api/v1/push",
                 tags={"job": "hikvision_stream", "source": "python"},

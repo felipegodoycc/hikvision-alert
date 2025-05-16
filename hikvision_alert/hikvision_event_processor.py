@@ -16,6 +16,7 @@ class HikvisionEventProcessor:
         self.hikvisionApi = HikvisionAPI(config.HIKVISION_IP, config.HIKVISION_USER, config.HIKVISION_PASSWORD)
         self.imageAnalizer = ImageAnalizer()
         self.imageAnalizer.load_model()
+        config.print_vars()
 
     def process_event(self, hikvision_event):
         try:

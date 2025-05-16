@@ -1,6 +1,4 @@
 # Importamos las librerias necesarias
-import dotenv
-dotenv.load_dotenv()
 from hikvision_alert import HikvisionEventProcessor
 from hikvision_alert import logger
 

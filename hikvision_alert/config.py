@@ -13,6 +13,7 @@ class Config:
         return cls._instance
 
     def _initialize(self):
+        dotenv.load_dotenv(override=True)
         # Logger configuration
         self.LOGGER_LEVEL = os.getenv("LOGGER_LEVEL", "INFO")
         # Base directory
