@@ -1,6 +1,8 @@
 # Importamos las librerias necesarias
-from src.hikvision_event_processor import HikvisionEventProcessor
-from src.logger import logger
+import dotenv
+dotenv.load_dotenv()
+from hikvision_alert import HikvisionEventProcessor
+from hikvision_alert import logger
 
 # Instanciacion de clases necesarias
 hikvsionEventProcessor = HikvisionEventProcessor()

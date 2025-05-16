@@ -7,8 +7,8 @@ import os
 from .events import EventStore
 from .hikvision_api import HikvisionAPI
 from .image_analizer import ImageAnalizer
-from .config import config
 from .logger import logger
+from .config import config
 
 class HikvisionEventProcessor:
     def __init__(self):

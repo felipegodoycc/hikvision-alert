@@ -5,8 +5,8 @@ setup(
     version="1.0.0",
     description="Procesador de eventos para cámaras Hikvision con análisis de imágenes.",
     author="Felipe Godoy",
-    packages=find_packages(where="src"),
-    package_dir={"": "src"},
+    packages=find_packages(where="hikvision_alert"),
+    package_dir={"": "hikvision_alert"},
     install_requires=[
         "requests",
         "python-dotenv",

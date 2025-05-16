@@ -13,7 +13,6 @@ class Config:
         return cls._instance
 
     def _initialize(self):
-        dotenv.load_dotenv()
         # Logger configuration
         self.LOGGER_LEVEL = os.getenv("LOGGER_LEVEL", "INFO")
         # Base directory
@@ -73,5 +72,5 @@ class Config:
         for key, value in self.__dict__.items():
             if key != "_instance":
                 print(f"{key}: {value}")
-        
+
 config = Config()
