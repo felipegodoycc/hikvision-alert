@@ -35,7 +35,7 @@ class HikvisionEventProcessor:
                             self.eventsStore.delete_event(alert_event['id']) # Eliminamos el ultimo evento ya que no tiene importancia
                         os.remove(snapshot)
         except Exception as e:
-            logger.error(f"[process_event] Error procesando evento: { str(e) }")
+            logger.exception(f"[process_event] Error procesando evento: { str(e) }")
             
     def fire_webhook(self, channel, snapshot):
         def send():

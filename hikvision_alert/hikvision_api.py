@@ -78,7 +78,7 @@ class HikvisionAPI:
                         elif buffer:
                             buffer += line + b"\n"
             except requests.exceptions.RequestException as e:
-                logger.warning(f"🔌 Stream desconectado, reintentando en 5s... ({e})")
+                logger.warning(f"Stream desconectado, reintentando en 5s... ({e})")
                 time.sleep(5)
             except Exception as e:
                 logger.error(f"Error inesperado: {e}")
