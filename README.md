@@ -101,7 +101,7 @@ This project is designed to process events from Hikvision cameras in DVR, analyz
 
 6. Run the application:
    ```bash
-   python __main__.py
+   python service.py
    ``` 
 
 ## Install as a service
@@ -164,7 +164,7 @@ This project is designed to process events from Hikvision cameras in DVR, analyz
   ```
 
 ## Project Structure
-- `__main__.py`: Main entry point.
+- `service.py`: Main entry point.
 - `src/config.py`: Configuration management.
 - `src/events.py`: Event management.
 - `src/hikvision_api.py`: Connection with Hikvision cameras.
