@@ -175,7 +175,7 @@ This project is designed to process events from Hikvision cameras in DVR, analyz
 Contributions are welcome! Please open an issue or submit a pull request.
 
 ## Issues
-If you encounter any issues, please open an issue on GitHub. Include details about your environment and the steps to reproduce the problem.
+If you find any issues, please open an issue on GitHub. Include details about your environment and the steps to reproduce the problem.
 
 ## License
 This project is under the MIT License. See the `LICENSE` file for more details.
