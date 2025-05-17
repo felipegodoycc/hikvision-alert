@@ -12,11 +12,16 @@ then
     exit 1
 fi
 
-# Create a virtual environment
-VENV_DIR="${INSTALL_DIR}/venv"
-if [ ! -d "$VENV_DIR" ]; then
-    echo "Creating virtual environment in ${VENV_DIR}..."
-    python3 -m venv "$VENV_DIR"
+# Check if virtualenv is installed
+if ! command -v virtualenv &> /dev/null
+then
+    echo "virtualenv is not installed. Installing it now..."
+    # Create a virtual environment
+    VENV_DIR="${INSTALL_DIR}/venv"
+    if [ ! -d "$VENV_DIR" ]; then
+        echo "Creating virtual environment in ${VENV_DIR}..."
+        python3 -m venv "$VENV_DIR"
+    fi
 fi
 
 # Activate the virtual environment and install dependencies
@@ -38,7 +43,7 @@ fi
 
 # Check if the service file already exists
 if [ -f "$SERVICE_FILE" ]; then
-    echo "Service file already exists at ${SERVICE_FILE}. Removing."
+    echo "Service file already exists at ${SERVICE_FILE}. Overwriting."
     rm "$SERVICE_FILE"
 fi
 
