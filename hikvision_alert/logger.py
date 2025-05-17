@@ -4,7 +4,7 @@ from logging_loki import LokiHandler
 
 class HikvisionAlertLogger:
     def __init__(self):
-        self.logger = logging.getLogger(__name__)
+        self.logger: logging.Logger = logging.getLogger(__name__)
         self.config_logger()
         
     # Configuracion de logging
@@ -29,4 +29,4 @@ class HikvisionAlertLogger:
     def get_logger(self):
         return self.logger
 
-logger = HikvisionAlertLogger().get_logger()
+logger: logging.Logger = HikvisionAlertLogger().get_logger()
