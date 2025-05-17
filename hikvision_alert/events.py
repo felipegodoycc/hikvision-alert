@@ -12,7 +12,6 @@ class EventStore():
         self.events: list = []
         self.idx: dict = {}
         self.idx_by_channel: dict[str, list[str]] = {}
-        print(config)
         
     def add_event(self, hik_event: dict):
         channel: str = str(hik_event.get('channelID', ''))
