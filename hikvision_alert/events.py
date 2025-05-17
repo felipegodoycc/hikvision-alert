@@ -9,12 +9,12 @@ from pytz import timezone
 
 class EventStore():
     def __init__(self):
-        self.self = []
-        self.idx = {}
-        self.idx_by_channel = {}
+        self.events: list = []
+        self.idx: dict = {}
+        self.idx_by_channel: dict[str, list[str]] = {}
         
-    def add_event(self, hik_event):
-        channel = hik_event.get('channelID')
+    def add_event(self, hik_event: dict):
+        channel: str = str(hik_event.get('channelID', ''))
         logger.debug(f"Evento hik: {str(hik_event)}")
         hik_camera_name = hik_event.get('cameraName', 'Desconocido')
         camera_name = config.CAMERAS_NAME.get(channel, hik_camera_name).replace(" ", "_")
@@ -32,17 +32,17 @@ class EventStore():
             'active_post_count': hik_event.get('activePostCount', 0)
         }
         
-        self.self.append(alert_event)
-        self.idx[alert_event['id']] = len(self.self) - 1
+        self.events.append(alert_event)
+        self.idx[alert_event['id']] = len(self.events) - 1
         
         if channel not in self.idx_by_channel:
             self.idx_by_channel[channel] = [alert_event['id']]
         else:
             self.idx_by_channel[channel].append(alert_event['id'])
         
-        if len(self.self) > config.MAX_EVENTS:
-            del self.self[0]
-            self.idx.pop(self.self[0]['id'], None)
+        if len(self.events) > config.MAX_EVENTS:
+            del self.events[0]
+            self.idx.pop(self.events[0]['id'], None)
             if channel in self.idx_by_channel:
                 self.idx_by_channel[channel].pop(0)
                 if not self.idx_by_channel[channel]:
@@ -52,24 +52,36 @@ class EventStore():
     
     def get_event(self, event_id):
         if event_id in self.idx:
-            return self.self[self.idx[event_id]]
+            return self.events[self.idx[event_id]]
         return None
+    
+    def update_idxs(self):
+        self.idx = {event['id']: i for i, event in enumerate(self.events)}
+        self.idx_by_channel = {}
+        for i, event in enumerate(self.events):
+            channel = event['channel']
+            if channel not in self.idx_by_channel:
+                self.idx_by_channel[channel] = [event['id']]
+            else:
+                self.idx_by_channel[channel].append(event['id'])
     
     def delete_event(self, event_id):
         if event_id in self.idx:
             index = self.idx[event_id]
-            del self.self[index]
+            del self.events[index]
             del self.idx[event_id]
+            # Fix idx after deletion
+            self.update_idxs()
             return True
         return False 
     
     def confirm_detection(self, event_id: str, detected_objects: list):
         if event_id in self.idx:
             index = self.idx[event_id]
-            self.self[index]['result'] = True
-            self.self[index]['detected_objects'] = detected_objects
+            self.events[index]['result'] = True
+            self.events[index]['detected_objects'] = detected_objects
             if config.LOKI_URL:
-                send_event_to_loki(self.self[index])
+                send_event_to_loki(self.events[index])
             return True
         return False
     
