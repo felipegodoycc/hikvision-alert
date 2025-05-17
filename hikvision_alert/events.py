@@ -12,6 +12,7 @@ class EventStore():
         self.events: list = []
         self.idx: dict = {}
         self.idx_by_channel: dict[str, list[str]] = {}
+        print(config)
         
     def add_event(self, hik_event: dict):
         channel: str = str(hik_event.get('channelID', ''))
@@ -41,8 +42,8 @@ class EventStore():
             self.idx_by_channel[channel].append(alert_event['id'])
         
         if len(self.events) > config.MAX_EVENTS:
-            del self.events[0]
             self.idx.pop(self.events[0]['id'], None)
+            del self.events[0]
             if channel in self.idx_by_channel:
                 self.idx_by_channel[channel].pop(0)
                 if not self.idx_by_channel[channel]:
