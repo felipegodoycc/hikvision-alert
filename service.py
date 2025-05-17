@@ -9,4 +9,4 @@ if __name__ == "__main__":
     try:
         hikvsionEventProcessor.listen()
     except Exception as e:
-        logger.error(f"Error general: { str(e)}")
+        logger.error(f"Error general: { str(e)}") # type: ignore
