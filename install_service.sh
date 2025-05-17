@@ -36,6 +36,12 @@ else
     echo ".env file already exists. Please check it for your settings."
 fi
 
+# Check if the service file already exists
+if [ -f "$SERVICE_FILE" ]; then
+    echo "Service file already exists at ${SERVICE_FILE}. Removing."
+    rm "$SERVICE_FILE"
+fi
+
 # Create the service file with the virtual environment configured
 echo "Creating service file at ${SERVICE_FILE}..."
 bash -c "cat > ${SERVICE_FILE}" <<EOL
