@@ -119,3 +119,4 @@ dmypy.json
 cython_debug/
 
 images/
+.vscode/
