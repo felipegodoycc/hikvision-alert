@@ -47,6 +47,7 @@ class EventStore():
                 self.idx_by_channel[channel].pop(0)
                 if not self.idx_by_channel[channel]:
                     del self.idx_by_channel[channel]
+            self.update_idxs()
         
         return alert_event
     
